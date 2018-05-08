@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Menu</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+<!--  <link rel="stylesheet" type="text/css" href="addFont.css" /> -->
+<!-- <script src=”js/bootstrap.min.js”></script> -->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+
+<body>
+<script type="text/javascript">
+
+ var xMLHttpRequest = new XMLHttpRequest();
+ var price = 0;
+ var item;
+ var itemPrice;
+ 
+ function addItem(id, itemprice){
+	xMLHttpRequest.open("Get","/Foodie/cart?food="+ id, true);
+  	xMLHttpRequest.onreadystatechange = processFood;
+  	item = id;
+  	itemPrice = itemprice;
+ 	xMLHttpRequest.send(null);
+ }
+  var processFood = function () {
+		if (xMLHttpRequest.readyState == 4 && xMLHttpRequest.status == 200){
+  			var node = document.createElement("TR");                 // Create a <li> node
+  			var textnode = document.createTextNode (item + " " + itemPrice);         // Create a text node
+  			price = price + itemPrice;
+  			node.appendChild(textnode);                    // Append the text to <li>
+  			document.getElementById("addedItem").appendChild(node);
+  			document.getElementById("pricedata").innerHTML = price;
+  			console.log("food added in database");
+  		    }
+}
+</script>
+
+<div id="menu" class="container-fluid col-lg-7">
+  <div style="background-color:blue">Menu </div>
+  <br>
+<table>
+  <tr>
+  <td id="pizza" onclick="addItem('Pizza',10);"> Pizza</td>
+  <td id="pPrice" align="right"> 10$</td>
+  </tr>
+  <tr>
+  <td id="Friedrice" onclick="addItem('FriedRice',5);"> Fried Rice</td>
+  <td id="fPrice" align="right"> 5$</td>
+</tr>
+<tr>
+  <td id="chinese" onclick="addItem('chinese',15);"> Chinese</td>
+  <td id="cPrice" align="right"> 15$</td>
+  </tr>
+  <tr>
+  <td id="curry" onclick="addItem('curry',6);"> Curry</td>
+  <td id="cuPrice" align="right"> 6$</td>
+  </tr>
+  <tr>
+  <td id="rice" onclick="addItem('rice',3);"> Rice</td>
+  <td id="rPrice" align="right"> 3$</td>
+</tr>
+<tr>
+  <td id="Chicken" onclick="addItem('Chicken',7);"> Chicken</td>
+  <td id="chPrice" align="right"> 7$</td>
+  </tr>
+  <tr>
+  <td id="Mutton" onclick="addItem('Mutton',12.5);"> Mutton</td>
+  <td id="MPrice" align="right"> 12.5$</td>
+</tr>
+  </table>
+</div>
+ 
+<div id="cart" class="container-fluid col-lg-5">
+  <div style="background-color:blue">Cart</div>
+  <table id="addedItem">
+  <tr> <td><br></td></tr>
+  </table>
+  <table id="totalprice">
+  <tr>
+  <td>Total  </td>
+  <td id="pricedata">  0</td>
+  </tr>
+  </table>
+</div>  
+
+</body>
+</html>

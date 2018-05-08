@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<title>Insert title here</title>
+</head>
+
+
+<body>
+<p id="rest">Welcome </p>
+
+<script type="text/javascript">
+function printRest(){
+	var StoredJ = localStorage.getItem("restJson");
+	console.log(StoredJ);
+	for (i=0;i<restObj.businesses.length; i++){
+			document.write("<br>");
+			document.write("Restaurant Name: " + StoredJ.businesses[i].id);
+			document.write("<br>");
+			document.write("Phone: " + StoredJ.businesses[i].phone);
+			document.write("<br>");
+			document.write("Rating: " + StoredJ.businesses[i].rating);
+			document.write("<br>");
+			document.write("Review: " + StoredJ.businesses[i].snippet_text);
+			document.write("<hr />")
+		}
+}
+
+</script>
+
+</body>
+</html>

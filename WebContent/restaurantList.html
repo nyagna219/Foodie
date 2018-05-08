@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Foodie Search Results</title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<title>Foodie Search Results</title>
+
+<style>
+#table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#table td, #table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+
+<body onload="buildHtmlTable();">
+<table id="table" border="1">
+ </table>
+</body>
+
+<script>
+
+var StoredJ=JSON.parse(localStorage.getItem("restJson"));
+var myList = StoredJ.businesses;
+
+function buildHtmlTable() {
+	var headerTr$ = $('<tr/>');
+	headerTr$.append($('<th/>').html("Name"));
+	headerTr$.append($('<th/>').html("Categories"));
+	headerTr$.append($('<th/>').html("Rating"));
+	headerTr$.append($('<th/>').html("Rating Count"));
+	headerTr$.append($('<th/>').html("Top Review"));
+	headerTr$.append($('<th/>').html("Phone"));
+	headerTr$.append($('<th/>').html("Order Now"));
+	$("#table").append(headerTr$);
+
+	var button = '<input type=' + '"submit" onclick="window.location="/Foodie/menu.html";">';
+	for (var i = 0 ; i < myList.length ; i++) {
+		var row$ = $('<tr/>');
+		row$.append($('<td/>').html(myList[i].name));
+		row$.append($('<td/>').html(myList[i].categories));
+		row$.append($('<td/>').html(myList[i].rating));
+		row$.append($('<td/>').html(myList[i].review_count));
+		row$.append($('<td/>').html(myList[i].snippet_text));
+		row$.append($('<td/>').html(myList[i].display_phone));
+		row$.append($('<td/>').html(button));
+		$("#table").append(row$);
+	}
+	
+}
+
+</script>
+
+</body>
+</html>

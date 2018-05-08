@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+ <link rel="stylesheet" type="text/css" href="addFont.css" />
+<!-- <script src=”js/bootstrap.min.js”></script> -->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+
+<body>
+  <div class="”container”">
+     <h1><a href="”#”">Welcome to Foodie.com</a></h1>
+	 <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+	            <li><a href="#">About</a></li>
+	            <li><a href="#">Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Already have an account?</p></li>
+				<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+			        <ul id="login-dp" class="dropdown-menu">
+				    <li>
+					  <div class="row">
+							<div class="col-md-12">
+								Login via
+								<div class="social-buttons">
+									<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+									<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+								</div>
+                                or
+								 <form class="form" role="form" method="get" action="login" accept-charset="UTF-8" id="login-nav">
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+											 <input type="email" class="form-control" name="username" id="exampleInputEmail2" placeholder="Email address" required>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputPassword2">Password</label>
+											 <input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+										</div>
+										<div class="form-group">
+											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+										</div>
+										<div class="checkbox">
+											 <label>
+											 <input type="checkbox" name="rememberMe"> keep me logged-in
+											 </label>
+										</div>
+								 </form>
+							</div>
+							<div class="bottom text-center">
+								New here ? <a href="reg.jsp"><b>Join Us</b></a>
+							</div>
+					  </div>
+				    </li>
+        			</ul>
+                </li> 
+	        </ul>
+	    </div>
+	  </nav>
+    </div>
+    <script type="text/javascript">
+    var xMLHttpRequest = new XMLHttpRequest();
+    function findRestaurant(){
+     	xMLHttpRequest.onReadyStateChange = function () {processRestaurant();};
+    	xMLHttpRequest.open("Get","/Foodie/YelpAPI?search="+ document.getElementById("search").value+"&location="+ document.getElementById("location").value, true);
+    	xMLHttpRequest.send(null);
+    }
+    function processRestaurant(){
+    	if (xMLHttpRequest.readyState == 4 && xMLHttpRequest.status == 200){
+   			var restJObj = eval('(' + xMLHttpRequest.responseText +')');
+   			document.write(restJObj);
+    	}
+    	
+    }
+    </script>
+<form   method="get" action="YelpAPI" accept-charset="UTF-8" id="home" name="home">
+  <h2>Enter type of Food:</h2><br>
+  <input type="text" name="search"><br>
+   <h2>Enter Your Location:</h2><br>
+  <input type="text" name="location"><br>
+  <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>
